@@ -1,0 +1,12 @@
+services:
+  convert:
+    build:
+      context: ./
+      dockerfile_inline: |
+        FROM ubuntu:24.04
+        RUN apt update
+        RUN apt install -y libemail-outlook-message-perl libemail-sender-perl
+    command: bash -c "msgconvert *.msg"
+    working_dir: /messages
+    volumes:
+      - ./messages:/messages:rw
